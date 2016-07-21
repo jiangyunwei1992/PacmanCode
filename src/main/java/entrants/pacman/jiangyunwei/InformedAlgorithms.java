@@ -29,6 +29,7 @@ public class InformedAlgorithms
 			else if(right.size()==maxSize) dest = right.get(right.size()-1);
 			else if(up.size()==maxSize) dest = up.get(0);
 			else dest = down.get(down.size()-1);
+			//build the A* path to know which nodes to visit
 			int[] path = game.getAStarPath(current, dest, game.getPacmanLastMoveMade());
 			//System.out.println(Arrays.toString(path));
 			return game.getNextMoveTowardsTarget(current, path[0], DM.MANHATTAN);
@@ -36,6 +37,11 @@ public class InformedAlgorithms
 		}
 		else
 		{
+			// there should be something unexpected if there are no visible pills,
+			//in such case, should make decisions based on the situation
+			// if the pacman is lost again, it should guess one node have a pill
+			// and then go to that node so that it can get out of the dilemma
+			//if it is lost for the first time, it should go to the opposite direction
 			if(!lastMissing)
 			{
 				lastMissing = false;
