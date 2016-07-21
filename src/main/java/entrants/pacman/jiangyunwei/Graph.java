@@ -20,6 +20,9 @@ public class Graph
 	}
 	public static Graph buildGraph(List<List<Integer>> lists,int current)
 	{
+		//all visible pills of each direction is on a line
+		//thus, when creating the graph, all nodes should
+		//be lined to each other to form a line
 		Graph root = new Graph(current);
 		for(int index=0;index<lists.size();index++)
 		{
