@@ -14,6 +14,7 @@ public class Utils
 	public static Map<String,Node> pos_node = new HashMap<String,Node>();
 	public static boolean isOfDirection(String direction,Node currentNode, Node node)
 	{
+		//to judge the relative position of node to currentNode
 		int curX = currentNode.x;
 		int curY = currentNode.y;
 		int nodeX = node.x;
@@ -50,7 +51,8 @@ public class Utils
 	}
 	public static List<List<Integer>> divide(List<Integer> all,int current,Game game)
 	{
-		
+	//the visible pills are in a form of 十,
+	// so divide these fills to 4 directions: left, right, up and down
 		List<Integer> left = new ArrayList<Integer>();
 		List<Integer> right = new ArrayList<Integer>();
 		List<Integer> up = new ArrayList<Integer>();
