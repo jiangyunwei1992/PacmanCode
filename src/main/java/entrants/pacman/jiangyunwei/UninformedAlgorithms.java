@@ -10,34 +10,6 @@ public class UninformedAlgorithms
 {
 	static Stack<Graph> stack = new Stack<Graph>();
 	static Queue<Graph> queue = new LinkedList<Graph>();
-	///////////////////
-	public static boolean ghostsApproaching(Graph g,Game game)
-	{
-		GHOST[] ghosts = {GHOST.BLINKY,GHOST.INKY,GHOST.PINKY,GHOST.SUE};
-		Node[] nodes = game.getCurrentMaze().graph;
-		for(GHOST ghost:ghosts)
-		{
-			int ghostIndex = game.getGhostCurrentNodeIndex(ghost);
-			System.out.println(ghostIndex);
-			Node ghostNode = nodes[ghostIndex];
-			Node currentNode = nodes[game.getPacmanCurrentNodeIndex()];
-			MOVE lastMove = game.getGhostLastMoveMade(ghost);
-			
-			//pacman and ghost on the same horizonal line and ghost is at the left side of pacman
-			if(ghostNode.y==currentNode.y&&Utils.isOfDirection("left", currentNode, ghostNode)&&Utils.isOfDirection("left", currentNode, nodes[g.node])&&lastMove==MOVE.RIGHT)
-				return true;
-			//
-			if(ghostNode.y==currentNode.y&&Utils.isOfDirection("right", currentNode, ghostNode)&&Utils.isOfDirection("right", currentNode, nodes[g.node])&&lastMove==MOVE.LEFT)
-				return true;
-			//
-			if(ghostNode.x==currentNode.x&&Utils.isOfDirection("up", currentNode, ghostNode)&&Utils.isOfDirection("up", currentNode, nodes[g.node])&&lastMove==MOVE.DOWN)
-				return true;
-			//
-			if(ghostNode.x==currentNode.x&&Utils.isOfDirection("down", currentNode, ghostNode)&&Utils.isOfDirection("down", currentNode, nodes[g.node])&&lastMove==MOVE.UP)
-				return true;
-		}
-		return false;
-	}
 	////////////////////////////////////////////////////
 	public static Stack<Graph> DFS(Graph graph,Stack<Graph> stack)
 	{
@@ -75,7 +47,7 @@ public class UninformedAlgorithms
 	public static Queue<Graph> BFS(Graph graph,Game game)
 	{
 		Queue<Graph> queue = new LinkedList<Graph>();
-		Queue<Graph> path = new LinkedList<Graph>();
+		Queue<Graph> path = new LinkedList<Graph>();//return as the BFS path
 		graph.visited = true;
 		queue.add(graph);
 		while(!queue.isEmpty())
@@ -110,6 +82,8 @@ public class UninformedAlgorithms
 			List<Integer> right = directions.get(1);
 			List<Integer> up = directions.get(2);
 			List<Integer> down = directions.get(3);
+			//since visible pills in each direction is in the same line,
+			//it is feasible to visit the farthest pill
 			if(left.size()>=2)
 			{
 				int leftExtreme = left.get(0);
@@ -144,6 +118,7 @@ public class UninformedAlgorithms
 			Graph graph = Graph.buildGraph(directions, current);
 			//DFS to get the traversal order
 			queue = BFS(graph,game);
+			//visit the fist pill
 			while(queue.size()>1)
 				queue.poll();
 			//transform the traversal order into arrays
