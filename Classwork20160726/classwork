@@ -52,6 +52,13 @@ motorway(0,60).
 motorway(0,68).
 motorway(0,83).
 motorway(1,54).
+
+footpathRoute(A,B):-
+    footpathRoute(A,B,[])
+footpathRoute(A,B,V):-
+    (f(A,X);m(A,X);f(X,A);m(X,A),
+    not (member(X,V)),
+    (B = x); footpathRoute(X,B,[A|V]))
 a) 
 routeFoot(A,B) :-
     footpath(B,A);
