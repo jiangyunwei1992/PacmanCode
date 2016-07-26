@@ -1,0 +1,80 @@
+Q1:
+footpath(52,53).
+footpath(52,0).
+footpath(53,54).
+
+footpath(56,57).
+footpath(56,58).
+footpath(57,58).
+footpath(57,1).
+footpath(57,59).
+
+footpath(58,59).
+
+footpath(59,60).
+footpath(83,65).
+footpath(65,68).
+footpath(76,69).
+motorway(0,62).
+motorway(53,62).
+
+motorway(54,56).
+motorway(54,62).
+
+motorway(1,62).
+
+motorway(59,60).
+motorway(59,68).
+motorway(59,83).
+
+
+motorway(83,62).
+motorway(68,66).
+motorway(68,62).
+motorway(68,63).
+motorway(68,76).
+motorway(68,64).
+
+motorway(66,63).
+motorway(66,69).
+motorway(66,76).
+motorway(66,64).
+
+motorway(63,62).
+motorway(63,64).
+motorway(63,76).
+motorway(63,69).
+
+motorway(64,69).
+motorway(64,76).
+motorway(0,59).
+motorway(0,60).
+motorway(0,68).
+motorway(0,83).
+motorway(1,54).
+
+routeFoot(A,B) :-
+    footpath(B,A);
+    footpath(A,B).
+
+routeMotor(A,B) :-
+    motorway(A,B);
+    motorway(B,A).
+
+routeMixed(A,Connector,B):-
+    footpath(A,Connector);
+    motorway(Connector,B);
+    footpath(Connector,A);
+    motorway(Connector,B).
+
+dfs_startFoot(InititalState, Goal, Es, Solution) :-
+        dfs([InititalState], [], Es, Goal, Solution).
+
+dfs([H|_], Es0, Es, Goal, H) :- call(Goal, H), reverse(Es0, Es).
+dfs([H|T], Es0, Es, Goal, Solution):-
+        findall(X, (footpath(H, X),
+                       \+ member(X, Es0),
+                       \+ member(X, [H|T]) ), Children),
+        append(Children, T, OpenList),
+        dfs(OpenList, [H|Es0], Es, Goal, Solution).
+    
