@@ -1,19 +1,7 @@
 Important:
 Before running the program, please 
 make sure that you have already 
-installed OpenCV3 for Java. If 
-not, please use the command 
-"brew install opencv3 --with java", 
-but please make sure you have 
-already install homebrew on your 
-macbook. After installing OpenCV3,
-please add user library in your
-Eclipse. Steps are:
-Eclipse --> Preference -->
-Java --> Build path --> User
-libraries --> New --> Add 
-External Jars --> native library
-location.
+installed OpenCV3 for Java. 
 
 There are 4 buttons in the GUI, 
 if you click on the button 
