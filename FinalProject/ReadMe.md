@@ -1,6 +1,7 @@
 #FinalProject
 The project consists of 2 parts: The basic part covers the implementation of PCA, KNN, SVM, Logistic Regression algorithms.
 The advanced part is a face recognition system based on OpenCV.
+
 Before Running face recognition system based on OpenCV, Please make sure you’ve configured the environment:
 Install OpenCV 3.1.0.3 for java on your MacBook
 
